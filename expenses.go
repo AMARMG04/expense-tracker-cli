@@ -1,47 +1,49 @@
 package main
+
 import "fmt"
 
-var expenses []int
+var categoryTotals = make(map[string]int)
 
-func addExpense(amount int) {
-	if amount <= 0{
+func addExpense(amount int, category string) {
+	if amount <= 0 {
 		fmt.Println("Invalid Amount!")
-	}else if len(expenses) <= MaxExpenses{
-		expenses = append(expenses, amount)
-	}else{
-		fmt.Println("Max Expense Limit Reached!")
+		return
 	}
-}
 
-func removeExpense(index int) {
-	if index > 0 && index < len(expenses){
-		fmt.Println("Removed", expenses[index])
-		expenses = append(expenses[:index], expenses[index+1:]...,)
-	}else{
-		fmt.Println("Index out of bound")
+	if len(categoryTotals) >= MaxExpenses {
+		fmt.Println("Max Expense Limit Reached!")
+		return
 	}
+
+	categoryTotals[category] += amount
 }
 
 func listExpenses() {
-	for i, expense := range expenses{
-		fmt.Println("Expense ", i+1, " : ", expense)
+	for category, amount := range categoryTotals {
+		fmt.Println("Category:", category, "| Amount:", amount)
 	}
 }
 
-func calculateTotal() int{
-	var total int
-	for _, expense := range expenses{
-		total += expense
+func calculateTotal() int {
+	total := 0
+
+	for _, amount := range categoryTotals {
+		total += amount
 	}
 
 	return total
 }
 
-func highestExpense() int{
-	var maxExpense int = -1
-	for _, expense := range expenses{
-		if maxExpense < expense{
-			maxExpense = expense
+func highestExpense() int {
+	if len(categoryTotals) == 0 {
+		return 0
+	}
+
+	maxExpense := 0
+
+	for _, amount := range categoryTotals {
+		if amount > maxExpense {
+			maxExpense = amount
 		}
 	}
 

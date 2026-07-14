@@ -1,11 +1,10 @@
 package main
 
 func main() {
+	addExpense(500, "Food")
+	addExpense(1000, "Travel")
+	addExpense(250, "Food")
+	addExpense(-100, "Shopping")
 
-	addExpense(500)
-	addExpense(1000)
-	addExpense(250)
-	addExpense(-100)
 	showReport()
-	removeExpense(1)
 }
