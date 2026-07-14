@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 func showReport() {
-	fmt.Println("===== ", AppName, "" =====")
+	fmt.Println("===== ", AppName, " =====")
 	fmt.Println("Expenses:")
 	listExpenses()
 
