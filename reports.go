@@ -5,12 +5,15 @@ import "fmt"
 func showReport() {
 	fmt.Println("=====", AppName, "=====")
 
-	fmt.Println("Listing Expenses:")
+	fmt.Println("\nListing Expenses:")
 	listExpenses()
 
-	fmt.Println("Category Totals:")
-	fmt.Println(categoryTotal())
+	fmt.Println("\nCategory Totals:")
+
+	for category, total := range categoryTotal() {
+		fmt.Printf("%s: %d\n", category, total)
+	}
 
 	fmt.Println("\nTotal Expenses:", calculateTotal())
-	fmt.Println("Highest Category Expense:", highestExpense())
+	fmt.Println("Highest Expense:", highestExpense())
 }
